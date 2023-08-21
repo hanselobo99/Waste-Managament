@@ -148,7 +148,35 @@
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
-
+                @if(\Illuminate\Support\Facades\Auth::user()->role == "user")
+                    <x-responsive-nav-link href="{{route('complaint.create')}}"
+                                :active="request()->routeIs('complaint.create')">
+                        File a complaint
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{route('complaint.index')}}" :active="request()->routeIs('complaint.index')">
+                        View all complaints
+                    </x-responsive-nav-link>
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->role == "admin")
+                    <x-responsive-nav-link href="{{route('admin.complaint.all')}}"
+                                :active="request()->routeIs('admin.complaint.all')">
+                        View all complaints
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{route('user.index')}}"
+                                :active="request()->routeIs('user.index')">
+                        Users
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{route('user.create')}}"
+                                :active="request()->routeIs('user.create')">
+                        Add User
+                    </x-responsive-nav-link>
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->role == "driver")
+                    <x-responsive-nav-link href="{{route('driver.complaint.all')}}"
+                                :active="request()->routeIs('driver.complaint.all')">
+                        View all complaints
+                    </x-responsive-nav-link>
+                @endif
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-responsive-nav-link href="{{ route('api-tokens.index') }}"
                                            :active="request()->routeIs('api-tokens.index')">

@@ -16,7 +16,12 @@
                         @csrf
                         <x-custom.input name="address" label="Address"></x-custom.input>
                         <x-custom.select name="type" label="Nature of Complaint"
-                                         :options="['al'=>'one']"></x-custom.select>
+                                         :options="[
+                                                'littering' => 'Littering',
+                                                'improper_disposal' => 'Improper Waste Disposal',
+                                                'missed_collection' => 'Missed Garbage Collection',
+                                                'illegal_dumping' => 'Illegal Dumping',
+                                                ]"></x-custom.select>
                         <x-custom.textarea name="description" label="Description"></x-custom.textarea>
                         <x-custom.file name="photo[]" label="Photo" type="file"></x-custom.file>
                         <button type="submit"

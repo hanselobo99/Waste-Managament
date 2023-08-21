@@ -5,3 +5,12 @@
 [x-cloak] {
     display: none;
 }
+
+.bgImage {
+    background-image: url("/public/images/recycle.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; /* This makes the image cover the background area */
+    height: 100vh;
+    width: 100%;
+}
+
