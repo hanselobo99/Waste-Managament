@@ -54,7 +54,7 @@
                                         {{$complaint->complaintStatus->status}}
                                     </td>
                                     <td class="px-6 py-4 capitalize">
-                                        <a href="{{route('admin.complaint.show',$complaint->id)}}"
+                                        <a href="{{route('driver.complaint.show',$complaint->id)}}"
                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                     </td>
                                 </tr>

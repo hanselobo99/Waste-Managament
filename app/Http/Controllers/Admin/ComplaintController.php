@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ComplaintController extends Controller
 {
-    function viewAll()
+    public function viewAll()
     {
         $complaints =  Complaint::with('complaintStatus')->with('user')->get();
         return view('admin.view-all', compact('complaints'));
     }
 
 
-    function viewOne(string $id)
+    public function viewOne(string $id)
     {
         $complaint = Complaint::with(['complaintStatus' => fn($query) => $query->with('user')->with('complaintAssignedTo')])->with('user')->with('complaintPhotos')->where('id', $id)->first();
         $drivers = User::where('role', 'driver')->get();
@@ -30,7 +30,7 @@ class ComplaintController extends Controller
         return view('admin.view-one-complaint', compact('complaint', 'driverArray'));
     }
 
-    function assign(Request $request, string $id)
+    public function assign(Request $request, string $id)
     {
         $complaint = ComplaintStatus::where('complaint_id', $id)->first();
 

@@ -15,4 +15,8 @@ class ComplaintAssignedTo extends Model
     {
         return $this->belongsTo(User::class,'driver');
     }
+    public function complaintStatus(): BelongsTo
+    {
+        return $this->belongsTo(ComplaintStatus::class);
+    }
 }

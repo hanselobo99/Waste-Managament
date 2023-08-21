@@ -31,8 +31,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="bg-white border-b   hover:bg-gray-50">
-                            @foreach($complaints as $complaint)
+                        @foreach($complaints as $complaint)
+                            <tr class="bg-white border-b   hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     {{$loop->index + 1}}
                                 </td>
@@ -46,10 +46,11 @@
                                     {{$complaint->complaintStatus->status}}
                                 </td>
                                 <td class="px-6 py-4 capitalize">
-                                    <a href="{{route('complaint.show',$complaint->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a href="{{route('complaint.show',$complaint->id)}}"
+                                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                 </td>
-                            @endforeach
-                        </tr>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

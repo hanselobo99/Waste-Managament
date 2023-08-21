@@ -29,4 +29,9 @@ class Complaint extends Model
         return $this->hasOne(ComplaintStatus::class);
     }
 
+    public function assignedTo()
+    {
+        return $this->hasOneThrough(ComplaintAssignedTo::class, ComplaintStatus::class, 'complaint_id','complaint_status_id','id','id')->latest();
+    }
+
 }

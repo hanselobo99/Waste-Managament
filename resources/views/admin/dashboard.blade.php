@@ -33,8 +33,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="bg-white border-b   hover:bg-gray-50">
-                            @forelse($complaints as $complaint)
+
+                        @forelse($complaints as $complaint)
+                            <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     {{$loop->index + 1}}
                                 </td>
@@ -54,10 +55,15 @@
                                     <a href="{{route('admin.complaint.show',$complaint->id)}}"
                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                 </td>
-                            @empty
-                                <td colspan="6" class="text-red-600 text-center font-bold text-2xl">No pending complaints</td>
-                            @endforelse
-                        </tr>
+                            </tr>
+                        @empty
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td colspan="6" class="text-red-600 text-center font-bold text-2xl">No pending
+                                    complaints
+                                </td>
+                            </tr>
+                        @endforelse
+
                         </tbody>
                     </table>
                 </div>

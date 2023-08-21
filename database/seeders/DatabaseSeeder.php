@@ -22,24 +22,51 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         User::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'admin1',
+            'email' => 'admin1@gmail.com',
             'password' => Hash::make('password'),
-            'phone'=>'9876543219',
+            'phone' => '9876543219',
             'role' => 'admin'
         ]);
         User::create([
-            'name' => 'driver',
-            'email' => 'driver@gmail.com',
+            'name' => 'admin2',
+            'email' => 'admin2@gmail.com',
             'password' => Hash::make('password'),
-            'phone'=>'9876543219',
+            'phone' => '9876543219',
+            'role' => 'admin'
+        ]);
+        User::create([
+            'name' => 'driver1',
+            'email' => 'driver1@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '9876543219',
             'role' => 'driver',
         ]);
         User::create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
+            'name' => 'driver2',
+            'email' => 'driver2@gmail.com',
             'password' => Hash::make('password'),
-            'phone'=>'9876543219',
+            'phone' => '9876543219',
+            'role' => 'driver',
+        ]);
+        User::create([
+            'name' => 'driver3',
+            'email' => 'driver3@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '9876543219',
+            'role' => 'driver',
+        ]);
+        User::create([
+            'name' => 'user1',
+            'email' => 'user1@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '9876543219',
+        ]);
+        User::create([
+            'name' => 'user2',
+            'email' => 'user2@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '9876543219',
         ]);
     }
 }

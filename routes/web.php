@@ -24,33 +24,25 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        if (Auth::user()->role == 'admin') {
-            $complaints = Complaint::with('complaintPhotos')
-                ->whereHas('complaintStatus', function ($query) {
-                    $query->where('status', 'pending');
-                })->with('user')->with('complaintPhotos')->get();
-            return view('admin/dashboard', compact('complaints'));
-        } else if (Auth::user()->role == 'driver') {
-            return view('driver/dashboard');
-        } else {
-            $complaints = Complaint::with('complaintPhotos')
-                ->whereHas('complaintStatus', function ($query) {
-                    $query->where('status', 'pending');
-                })->with('user')->with('complaintPhotos')->where('user_id', Auth::id())->get();
-            return view('user/dashboard', compact('complaints'));
-        }
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\Controller::class, 'index'])->name('dashboard');
     Route::prefix('user')->group(function () {
         Route::resource('complaint', \App\Http\Controllers\User\ComplaintController::class)->except(['edit', 'update', 'destroy']);
     });
     Route::prefix('admin')->group(function () {
-        Route::controller( \App\Http\Controllers\Admin\ComplaintController::class)->prefix('complaint')->group(function (){
-            Route::get('','viewAll')->name('admin.complaint.all');
-            Route::get('{id}','viewOne')->name('admin.complaint.show');
-            Route::post('assign/{id}','assign')->name('admin.complaint.save');
+        Route::controller(\App\Http\Controllers\Admin\ComplaintController::class)->prefix('complaint')->group(function () {
+            Route::get('', 'viewAll')->name('admin.complaint.all');
+            Route::get('{id}', 'viewOne')->name('admin.complaint.show');
+            Route::post('assign/{id}', 'assign')->name('admin.complaint.save');
         });
     });
-
+    Route::prefix('driver')->group(function () {
+        Route::controller(\App\Http\Controllers\Driver\ComplaintController::class)->prefix('complaint')->group(function () {
+            Route::get('', 'viewAll')->name('driver.complaint.all');
+            Route::get('accept/{id}', 'accept')->name('driver.complaint.accept');
+            Route::get('reject/{id}', 'reject')->name('driver.complaint.reject');
+            Route::get('complete/{id}', 'completed')->name('driver.complaint.complete');
+            Route::get('{id}', 'viewOne')->name('driver.complaint.show');
+        });
+    });
 });
 

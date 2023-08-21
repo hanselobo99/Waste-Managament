@@ -22,4 +22,6 @@ class ComplaintStatus extends Model
     {
         return $this->hasMany(ComplaintAssignedTo::class);
     }
+
+
 }

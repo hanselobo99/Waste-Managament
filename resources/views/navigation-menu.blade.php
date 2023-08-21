@@ -20,15 +20,27 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <div class="ml-3 flex">
-                    <x-nav-link href="{{route('complaint.create')}}" :active="request()->routeIs('complaint.create')">
-                        File a complaint
-                    </x-nav-link>
-                    <x-nav-link href="{{route('complaint.index')}}" :active="request()->routeIs('complaint.index')">
-                        View all complaints
-                    </x-nav-link>
-                    <x-nav-link href="{{route('admin.complaint.all')}}" :active="request()->routeIs('admin.complaint.all')">
-                        View all complaints
-                    </x-nav-link>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == "user")
+                        <x-nav-link href="{{route('complaint.create')}}"
+                                    :active="request()->routeIs('complaint.create')">
+                            File a complaint
+                        </x-nav-link>
+                        <x-nav-link href="{{route('complaint.index')}}" :active="request()->routeIs('complaint.index')">
+                            View all complaints
+                        </x-nav-link>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == "admin")
+                        <x-nav-link href="{{route('admin.complaint.all')}}"
+                                    :active="request()->routeIs('admin.complaint.all')">
+                            View all complaints
+                        </x-nav-link>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == "driver")
+                        <x-nav-link href="{{route('driver.complaint.all')}}"
+                                    :active="request()->routeIs('driver.complaint.all')">
+                            View all complaints
+                        </x-nav-link>
+                    @endif
                 </div>
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
