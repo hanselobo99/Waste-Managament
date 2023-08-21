@@ -10,14 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('complaint_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('password');
-            $table->rememberToken();
-            $table->enum('role', ['admin', 'driver', 'user'])->default('user');
+            $table->foreignIdFor(\App\Models\Complaint::class)->constrained();
+            $table->enum('status', ['pending', 'rejected', 'completed', 'onProcess'])->default('pending');
+            $table->foreignIdFor(\App\Models\User::class, 'assigned_by')->nullable()->constrained('users','id');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('complaint_statuses');
     }
 };
