@@ -17,15 +17,17 @@
                         <p class="text-gray-600 mb-2">Description: {{ $complaint->description }}</p>
                         <p class="text-gray-600 mb-2">Submitted On: {{ $complaint->created_at }}</p>
                         <p class="text-gray-600 mb-2">Status: {{ $complaint->complaintStatus->status }}</p>
-                        <p class="text-gray-600 mb-2">Assigned By: {{ $complaint->complaintStatus->assigned_by ?? 'Not Assigned' }}</p>
+                        <p class="text-gray-600 mb-2">Assigned
+                            By: {{ $complaint->complaintStatus->assigned_by ?? 'Not Assigned' }}</p>
                     </div>
 
 
                     <div class="grid grid-cols-2 gap-2">
                         @foreach($complaint->complaintPhotos as $photo)
-                        <div>
-                            <img class="h-auto max-w-full rounded-lg" src="{{asset('storage/' . $photo->path)}}" alt="">
-                        </div>
+                            <div>
+                                <img class="h-auto max-w-full rounded-lg" src="{{asset('storage/' . $photo->path)}}"
+                                     alt="">
+                            </div>
                         @endforeach
                     </div>
 
@@ -33,6 +35,5 @@
             </div>
 
         </div>
-    </div>
     </div>
 </x-app-layout>

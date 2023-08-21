@@ -26,6 +26,9 @@
                     <x-nav-link href="{{route('complaint.index')}}" :active="request()->routeIs('complaint.index')">
                         View all complaints
                     </x-nav-link>
+                    <x-nav-link href="{{route('admin.complaint.all')}}" :active="request()->routeIs('admin.complaint.all')">
+                        View all complaints
+                    </x-nav-link>
                 </div>
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">

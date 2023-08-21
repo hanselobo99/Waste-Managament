@@ -26,18 +26,30 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         if (Auth::user()->role == 'admin') {
-            return view('admin/dashboard');
+            $complaints = Complaint::with('complaintPhotos')
+                ->whereHas('complaintStatus', function ($query) {
+                    $query->where('status', 'pending');
+                })->with('user')->with('complaintPhotos')->get();
+            return view('admin/dashboard', compact('complaints'));
         } else if (Auth::user()->role == 'driver') {
             return view('driver/dashboard');
         } else {
-            $complaints = Complaint::with(['complaintStatus' => function ($query) {
-                return $query->where('status', 'pending');
-            }])->with('user')->with('complaintPhotos')->get();
+            $complaints = Complaint::with('complaintPhotos')
+                ->whereHas('complaintStatus', function ($query) {
+                    $query->where('status', 'pending');
+                })->with('user')->with('complaintPhotos')->where('user_id', Auth::id())->get();
             return view('user/dashboard', compact('complaints'));
         }
     })->name('dashboard');
     Route::prefix('user')->group(function () {
         Route::resource('complaint', \App\Http\Controllers\User\ComplaintController::class)->except(['edit', 'update', 'destroy']);
+    });
+    Route::prefix('admin')->group(function () {
+        Route::controller( \App\Http\Controllers\Admin\ComplaintController::class)->prefix('complaint')->group(function (){
+            Route::get('','viewAll')->name('admin.complaint.all');
+            Route::get('{id}','viewOne')->name('admin.complaint.show');
+            Route::post('assign/{id}','assign')->name('admin.complaint.save');
+        });
     });
 
 });

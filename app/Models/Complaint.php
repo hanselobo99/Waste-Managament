@@ -28,4 +28,5 @@ class Complaint extends Model
     {
         return $this->hasOne(ComplaintStatus::class);
     }
+
 }

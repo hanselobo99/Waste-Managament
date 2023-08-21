@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('complaint_assigned_tos', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\ComplaintStatus::class)->constrained();
-            $table->foreignIdFor(\App\Models\User::class, 'driver')->constrained('users','id');
+            $table->foreignIdFor(\App\Models\User::class, 'driver')->constrained('users', 'id');
+            $table->enum('status', ['accepted', 'rejected', 'completed','pending']);
             $table->timestamps();
         });
     }
