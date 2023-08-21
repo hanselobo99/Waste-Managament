@@ -34,6 +34,7 @@ Route::middleware([
             Route::get('{id}', 'viewOne')->name('admin.complaint.show');
             Route::post('assign/{id}', 'assign')->name('admin.complaint.save');
         });
+        Route::resource('user', \App\Http\Controllers\Admin\UserController::class)->except(['edit', 'update', 'destroy','show']);
     });
     Route::prefix('driver')->group(function () {
         Route::controller(\App\Http\Controllers\Driver\ComplaintController::class)->prefix('complaint')->group(function () {

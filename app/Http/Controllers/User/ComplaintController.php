@@ -5,9 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ComplaintRequest;
 use App\Models\Complaint;
-use App\Models\ComplaintPhoto;
 use App\Models\ComplaintStatus;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -71,7 +69,12 @@ class ComplaintController extends Controller
      */
     public function show(string $id)
     {
-        $complaint = Complaint::with('complaintStatus')->with('user')->with('complaintPhotos')->where('id', $id)->first();
+        $complaint = Complaint::with(['complaintStatus' => fn($query) => $query->with('user')])
+            ->with('user')
+            ->with('complaintPhotos')
+            ->with('assignedTo')
+            ->where('id', $id)
+            ->first();
         return view('user.view-one-complaint', compact('complaint'));
     }
 

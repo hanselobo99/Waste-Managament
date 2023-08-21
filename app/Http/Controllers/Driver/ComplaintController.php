@@ -5,9 +5,6 @@ namespace App\Http\Controllers\Driver;
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Models\ComplaintAssignedTo;
-use App\Models\ComplaintStatus;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ComplaintController extends Controller

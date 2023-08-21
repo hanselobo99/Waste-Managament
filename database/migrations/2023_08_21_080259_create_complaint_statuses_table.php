@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('complaint_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Complaint::class)->constrained();
+            $table->foreignIdFor(\App\Models\Complaint::class)->constrained()->cascadeOnDelete();
             $table->enum('status', ['pending', 'rejected', 'completed', 'onProcess'])->default('pending');
-            $table->foreignIdFor(\App\Models\User::class, 'assigned_by')->nullable()->constrained('users','id');
+            $table->foreignIdFor(\App\Models\User::class, 'assigned_by')->nullable()->constrained('users','id')->cascadeOnDelete();
             $table->timestamps();
         });
     }

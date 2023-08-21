@@ -18,7 +18,10 @@
                         <p class="text-gray-600 mb-2">Submitted On: {{ $complaint->created_at }}</p>
                         <p class="text-gray-600 mb-2">Status: {{ $complaint->complaintStatus->status }}</p>
                         <p class="text-gray-600 mb-2">Assigned
-                            By: {{ $complaint->complaintStatus->assigned_by ?? 'Not Assigned' }}</p>
+                            By: {{ $complaint->complaintStatus->user->name ?? 'Not Assigned' }}</p>
+                        <p class="text-gray-600 mb-2">Driver
+                            : {{ $complaint->assignedTo->user->name ?? 'Not Assigned' }} Status:
+                            {{$complaint->assignedTo->status ?? 'Pending'}}</p>
                     </div>
 
 

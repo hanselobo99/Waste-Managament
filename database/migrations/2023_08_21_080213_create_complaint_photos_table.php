@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('complaint_photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Complaint::class)->constrained();
+            $table->foreignIdFor(\App\Models\Complaint::class)->constrained()->cascadeOnDelete();
             $table->string('path');
             $table->timestamps();
         });

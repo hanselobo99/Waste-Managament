@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('View All Complaints') }}
+            {{ __('View User') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                @if(empty($complaints))
-                    <p>No data</p>
+                @if(empty($users))
+                    <p>No Users</p>
                 @else
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left text-gray-500 ">
@@ -19,43 +19,36 @@
                                     Sl.No
                                 </th>
                                 <th class="px-6 py-3">
-                                    Type
+                                    Name
                                 </th>
                                 <th class="px-6 py-3">
-                                    Submitted By
+                                    Email
                                 </th>
                                 <th class="px-6 py-3">
-                                    Address
+                                    Phone
                                 </th>
                                 <th class="px-6 py-3">
-                                    Status
-                                </th>
-                                <th class="px-6 py-3">
-                                    View
+                                    Role
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($complaints as $complaint)
+                            @foreach($users as $user)
                                 <tr class="bg-white border-b hover:bg-gray-50">
                                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                         {{$loop->index + 1}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$complaint->type}}
+                                        {{$user->name}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$complaint->user->name}}
+                                        {{$user->email}}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{$complaint->address}}
+                                        {{$user->phone}}
                                     </td>
                                     <td class="px-6 py-4 capitalize">
-                                        {{$complaint->complaintStatus->status}}
-                                    </td>
-                                    <td class="px-6 py-4 capitalize">
-                                        <a href="{{route('admin.complaint.show',$complaint->id)}}"
-                                           class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                        {{$user->role}}
                                     </td>
                                 </tr>
                             @endforeach

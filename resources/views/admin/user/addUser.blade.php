@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('File complaint') }}
+            {{ __('Add User') }}
         </h2>
     </x-slot>
 
@@ -12,13 +12,15 @@
                     @error('errorMsg')
                     <x-custom.flash type="error">{{$message}}</x-custom.flash>
                     @enderror
-                    <form method="post" action="{{route('complaint.store')}}" enctype="multipart/form-data">
+                    <form method="post" action="{{route('user.update',$user->id)}}">
                         @csrf
-                        <x-custom.input name="address" label="Address"></x-custom.input>
-                        <x-custom.select name="type" label="Nature of Complaint"
-                                         :options="['al'=>'one']"></x-custom.select>
-                        <x-custom.textarea name="description" label="Description"></x-custom.textarea>
-                        <x-custom.file name="photo[]" label="Photo" type="file"></x-custom.file>
+                        <x-custom.input name="name" label="Name"></x-custom.input>
+                        <x-custom.input name="email" label="Email" type="email"></x-custom.input>
+                        <x-custom.input name="phone" label="Phone"></x-custom.input>
+                        <x-custom.input name="password" label="Password" type="password"></x-custom.input>
+                        <x-custom.input name="password_confirmation" label="Confirm Password" type="password"></x-custom.input>
+                        <x-custom.select name="role" label="Role"
+                                         :options="['admin'=>'Admin','driver'=>'Driver']"></x-custom.select>
                         <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Submit

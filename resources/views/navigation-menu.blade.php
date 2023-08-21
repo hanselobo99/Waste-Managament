@@ -34,6 +34,14 @@
                                     :active="request()->routeIs('admin.complaint.all')">
                             View all complaints
                         </x-nav-link>
+                        <x-nav-link href="{{route('user.index')}}"
+                                    :active="request()->routeIs('user.index')">
+                            Users
+                        </x-nav-link>
+                        <x-nav-link href="{{route('user.create')}}"
+                                    :active="request()->routeIs('user.create')">
+                            Add User
+                        </x-nav-link>
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::user()->role == "driver")
                         <x-nav-link href="{{route('driver.complaint.all')}}"
