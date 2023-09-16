@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::middleware([
     'auth:sanctum',
@@ -34,7 +34,7 @@ Route::middleware([
             Route::get('{id}', 'viewOne')->name('admin.complaint.show');
             Route::post('assign/{id}', 'assign')->name('admin.complaint.save');
         });
-        Route::resource('user', \App\Http\Controllers\Admin\UserController::class)->except(['edit', 'update', 'destroy','show']);
+        Route::resource('user', \App\Http\Controllers\Admin\UserController::class)->except(['edit', 'update', 'destroy', 'show']);
     });
     Route::prefix('driver')->group(function () {
         Route::controller(\App\Http\Controllers\Driver\ComplaintController::class)->prefix('complaint')->group(function () {
@@ -45,5 +45,13 @@ Route::middleware([
             Route::get('{id}', 'viewOne')->name('driver.complaint.show');
         });
     });
+
+
 });
 
+Route::get('technology', function () {
+    return view('pages.technologies');
+})->name('technologies');
+Route::get('recycling', function () {
+    return view('pages.recycling');
+})->name('recycling');

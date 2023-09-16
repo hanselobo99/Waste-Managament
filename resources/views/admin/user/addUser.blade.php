@@ -12,13 +12,14 @@
                     @error('errorMsg')
                     <x-custom.flash type="error">{{$message}}</x-custom.flash>
                     @enderror
-                    <form method="post" action="{{route('user.update',$user->id)}}">
+                    <form method="post" action="{{route('user.store')}}">
                         @csrf
                         <x-custom.input name="name" label="Name"></x-custom.input>
                         <x-custom.input name="email" label="Email" type="email"></x-custom.input>
                         <x-custom.input name="phone" label="Phone"></x-custom.input>
                         <x-custom.input name="password" label="Password" type="password"></x-custom.input>
-                        <x-custom.input name="password_confirmation" label="Confirm Password" type="password"></x-custom.input>
+                        <x-custom.input name="password_confirmation" label="Confirm Password"
+                                        type="password"></x-custom.input>
                         <x-custom.select name="role" label="Role"
                                          :options="['admin'=>'Admin','driver'=>'Driver']"></x-custom.select>
                         <button type="submit"
